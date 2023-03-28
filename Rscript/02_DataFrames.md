@@ -1,30 +1,4 @@
-#### No averaging
-
-```r
-# Dataframe with all specimens
-gdf <-geomorph.data.frame(
-  cavio.gpa,
-  species = species,
-  superfamily = superfamily,
-  family = family)
-
-# Extant species only
-gdf.ac <- geomorph.data.frame(
-	coords=cavio.ext_gpa$coords,
-    Csize=cavio.ext_gpa$Csize,
-    family=family.ac,
-    superfamily=superfamily.ac)
-
-# Dataframe with phylogeny-only specimen
-gdf.phylo <- geomorph.data.frame(
-	coords=caviophy.gpa$coords,
-    Csize=caviophy.gpa$Csize,
-    family=family_phy,
-    superfamily=superfamily_phy)
-dimnames(gdf.phylo$coords)[[3]]<-species_phy
-```
-
-#### Mean shape & csize
+# Mean Shape & csize
 
 ```r
 # Resulting data frame with mean shape and csize of all specimens 
@@ -56,7 +30,7 @@ gdf.phylo_mean<-geomorph.data.frame(
   family = family_phy_mean)
 ```
 
-# For Cochlea and SCs only
+## For Cochlea and SCs only on the phylogeny
 
 ```r
 # Cochlea
