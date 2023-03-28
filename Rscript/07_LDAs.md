@@ -1,7 +1,6 @@
-#### Allometry
+# LDA
 
 ```r
-# Create dataframe
 DF_meanac<- clean_names( data.frame(two.d.array(gdf_mean.ac$coords),superfamily=gdf_mean.ac$superfamily,check.names=FALSE))
 
 # LOOCV 
@@ -99,89 +98,3 @@ text(fLD2,fLD3,
 
 
 ```
-
-
-
-#### Allometry-free (doesn't work because allometry is phylogenetic)
-
-```R
-# Use the adjusted shape from all mean species and remove the fossil specimen. Maybe the model of non-allometry is false because the fossil specimen increase allometric variation
-
-cavfree.ac<-two.d.array(adj.shape)[-grep(TRUE,is.na(superfamily_mean)),]
-Daf<-data.frame(cavfree.ac, superfamily_mean=droplevels(gdf_mean.ac$superfamily),check.names=FALSE)
-Daf<-clean_names(Daf)
-
-### LOOCV
-
-
-v <-c()
-
-for (i in 1:nrow(Daf)){
-  test<- Daf[i,]
-  train<- Daf[-i,]
-  modele <-lda(formula=superfamily_mean ~ ., data=train)
-  pred <-predict(modele, newdata=test)
-  #r?cup?re la pr?diction
-  v <-c(v,pred$class[1])
-}
-
-v<-as.factor(v)
-levels(v)<-c("CA","CH","ER","OC")
-
-coordaf.mod<-confusionMatrix(reference=as.factor(Daf$superfamily_mean),data=v)
-coordaf.mod
-
-# Attribution of fossil taxa
-
-lda.coordaf<-lda(superfamily_mean~., data=Daf)
-
-fossaf<-data.frame(two.d.array(adj.shape)[grep(TRUE,is.na(superfamily_mean)),],check.names=FALSE)
-fossaf<-fossaf[-4,]
-colnames(fossaf)<-colnames(Daf)[1:219]
-
-pfossaf<-predict(lda.coordaf,fossaf)
-pfossaf
-```
-
-
-
-```r
-#This model directly uses the mean of extant species to adjust shape for allometry but the accuracy of it is <10%...
-
-shape.resid.meanac <- arrayspecs(Mfitallo.ac$residuals,  p=dim(gdf_mean$coords)[1], k=dim(gdf_mean$coords)[2])
-
-Daf<-clean_names(data.frame(two.d.array(adj.shape.meanac), superfamily=gdf_mean.ac$superfamily,check.names=FALSE))
-
-
-### LOOCV
-
-
-v <-c()
-
-for (i in 1:nrow(Daf)){
-  test<- Daf[i,]
-  train<- Daf[-i,]
-  modele <-lda(formula=superfamily ~ ., data=train)
-  pred <-predict(modele, newdata=test)
-  #r?cup?re la pr?diction
-  v <-c(v,pred$class[1])
-}
-
-v<-as.factor(v)
-levels(v)<-c("CA","CH","ER","OC")
-
-coordaf.mod<-confusionMatrix(reference=as.factor(Daf$superfamily),data=v)
-coordaf.mod
-
-# Attribution of fossil taxa
-
-lda.coordaf<-lda(superfamily_mean~., data=Daf)
-
-fossaf<-data.frame(two.d.array(adj.shape)[grep(TRUE,is.na(superfamily_mean)),],check.names=FALSE)
-fossaf<-fossaf[-4,]
-colnames(fossaf)<-colnames(Daf)[1:219]
-
-pfossaf<-predict(lda.coordaf,fossaf)
-pfossaf
-```
-
