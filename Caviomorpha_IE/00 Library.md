@@ -1,0 +1,8 @@
+library(geomorph)
+library(dplyr)
+library(Morpho)
+library(phytools)
+library(ape)
+library(MASS)
+library(caret)
+library(janitor)
