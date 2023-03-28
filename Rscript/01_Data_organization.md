@@ -1,5 +1,5 @@
 ```r
-setwd("/home/lea.dacunha/Work/M2/R/data/cavio/morphogeom")
+setwd("data")
 
 Dgeom<-readland.tps("Caviomorpha_extended_IE.tps",specID = "imageID")
 genus<-as.factor(substr(dimnames(Dgeom)[[3]], 1,3))		
@@ -196,14 +196,11 @@ names(meanDgeomcs.extant)<-dimnames(meanDgeomR.extant)[[3]]
 
 ```r
 # Setup topology 
-setwd("/home/lea.dacunha/Work/M2/R/data/cavio/topology")
+
 tre<-read.tree("CAVIO_MCC_short.tre")
 tip<-levels(species)
 tre_label_all<-tre$tip.label
 
-
-
-setwd("/home/lea.dacunha/Work/M2/R/data/cavio/morphogeom")
 
 Dgeom<-readland.tps("Caviomorpha_extended_IE.tps",specID = "imageID")
 morpho_taxa<-substr(dimnames(Dgeom)[[3]],1,7)
