@@ -274,7 +274,7 @@ tn<-t[!duplicated(t),]
 family_phy_mean<-as.factor(tn$X2)
 ```
 
-###### For SCs and cochlea only
+## For SCs and cochlea only
 
 ```r
 #Landmarks of the SCs and Cochlea only
@@ -291,7 +291,7 @@ caviophycs.gpa<-gpagen(Dgeomphy_CS,curves=dat_curvcs, ProcD= TRUE)
 
 ```r
 
-# COHLEA
+# cochlea
 lvl.group<-levels(species_phy)
 group<-species_phy
 
