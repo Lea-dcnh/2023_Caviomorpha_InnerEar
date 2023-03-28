@@ -1,6 +1,6 @@
 
 ```r
-# Test of the phylogenetic signal of the residuals of the regression tp see if pgls can be used -> yes
+# Test of the phylogenetic signal of the residuals of the regression tp see if pgls can be used
 Kres<-physignal(A=Mfitallo.phy$residuals,phy=treCAVIO,iter=9999)
 plot(Kres)
 
